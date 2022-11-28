@@ -1,0 +1,208 @@
+\documentclass[a4paper,12pt]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{xcolor}
+\usepackage[framemethod=default]{mdframed}
+
+\definecolor{blue}{RGB}{61, 160, 250}
+
+\author{Dave Alsina}
+\title{{\color{blue}Class Notes}}
+
+
+
+\newcommand{\incfig}[2][1]{%
+        \def\svgwidth{#1\columnwidth}
+        \import{./figures/}{#2.pdf_tex}
+}
+
+\pdfsuppresswarningpagegroup=1
+
+\begin{document}
+    \maketitle
+
+    \begin{mdframed}{{\color{blue}Nota: }}
+        Remember this is in english.
+        In exams you can turn to spanish.
+        Workshops in english.
+
+        \begin{itemize}
+            \item 2 credits theory (wendsday - theory)
+            \item 1 parctice        (friday - practice)
+        \end{itemize}
+
+        work with matlab.
+        1h and a half, for each part, theory and practice.
+
+        This course will be theory driven, but in the road we will 
+        use some applications.
+
+        For the practical part of the exam we can use internet.
+        For the theory we only can bring one sheet of paper.
+    \end{mdframed}
+
+
+    \section{What's a Dynamical sys?}
+    
+    \begin{itemize}
+        \item System: It's a collection of parts, which act as a whole.
+        \item Dynamical: Phenomena that are constatly evolving.
+    \end{itemize}
+
+    We will deal with:
+
+    \begin{itemize}
+        \item Difference equations.
+        \item Ordinay Differential equations.
+        \item Stochastic processes. $\rightarrow$ Stochastic differential equations.
+    \end{itemize}
+
+
+    \subsubsection{Difference equation (maps/iterative maps, they are functions)}
+
+    Evolution is discrete (change occurs in discrete time).
+    You can turn some continuos variable into discrete by modifiying the sampling
+    period (i look my bank account once a month).
+    
+    The most conventional way to model discrete behaviour is some sort of 
+    step wise funcion.
+
+    $n \geq 1$, variables, and we have eqns that relate values at a certain 
+    time to the adjacent values of the variables.\\
+
+    \textit{Ex:} 
+
+    \begin{align*}
+        X_{k+1} &= X_{k} + b, b \in \mathbb{R}\\
+                &\textit{The notation we will use, to emphasise that it's func of time:}\\
+        x(k+1) &= x(k)  + b, b \in \mathbb{R}, k \in \mathbb{Z}^{*}\\
+    \end{align*}
+
+    Notice that $K$ is a discrete set. 
+    If we talk about solutions of $x(k+1) = x(k)  + b, b \in \mathbb{R}$, we 
+    mean functions, but particularly: \textbf{Sequences} of numbers which 
+    satisfy the difference eqn.
+
+    A solution to $x(k+1) = x(k)  + b, b \in \mathbb{R}$ is $0, b, 2b, 3b, ...$
+    Another solution is for instance $1, b + 1, 2b + 1, ...$. To get a solution
+    we need a particular point.
+
+
+    \section{Differential eqs:}
+
+    Evolution is continuos.
+    (In general) they relate derivatives of $n\geq 1$ variables to their present
+    values.
+
+    \begin{align*}
+        \dot{x} = ax(t), t \in \mathbb{R}, \mathbb{R}^{+}, \mathbb{R}^{*}
+    \end{align*}
+
+    \begin{mdframed}{{\color{blue}Nota: }}
+        We can take derivaties relative to some complex variable, 
+        but we won't do that here.
+    \end{mdframed}
+
+    A solution to the above equation, is a continuos function, a function of
+    a continous set.
+    A particular solution would be: $x(t) = 0$, $x(t) = c\cdot e^{at}$.\\
+
+    \begin{mdframed}{{\color{blue}Nota: }}
+        The choice of which type of equation to use for model some problem, Difference
+        or Differential, depends on your will. Difference eqn. are easier to simulate,
+        Differential eqn. are harder to simulate and usually have error, so need 
+        some sort of aproximation. On maths Differential eqns are way easier than 
+        Difference ones.
+    \end{mdframed}
+
+
+    \section{Multivariable systems}
+    
+        More than one variable is generally necesary to model behaviour of 
+        systems with multiple parts.
+
+        To relate variables Linear Algebra is used many times (vector
+        representations of the variables), other times schematic diagrams
+        are also used (only for intuition).\\
+
+        \begin{mdframed}{{\color{blue}Nota: }}
+            All models are wrong, but some are better than others.
+        \end{mdframed}
+
+        \textit{Ex:}
+
+        \begin{enumerate}
+            \item \textbf{Geometric growth:} 
+
+            \begin{align*}
+                x(k + 1) =  ax(k), k \in  \mathbb{N}
+            \end{align*}
+        \end{enumerate}
+
+        A solution is $0, 0, ...$\\
+        Another solution is: $1, a, a^{2}, a^3, ...$
+
+        \begin{itemize}
+            \item if $a \geq 1$, $x(k)$ grows or decays to $-\infty, \infty$
+            \item if $0 < a < 1$, decays to zero.
+            \item if $0 > a > -1$, it osilates around zero, while decaying.
+        \end{itemize}
+
+        \textit{Another example:}
+
+        $k$: month. $x(k)$: number of pairs of bunnies.
+        $x(k + 2) = x(k + 1) + x(k)$.\\
+
+        \textit{Cohort population model example:} Population divide into age 
+        groups od equal span (5 years). $x_{0}, x_{1}, x_{2}, ..., x_{n}$.
+        $x_{0}$ represents the newborn individuals.\\
+        
+        if timestep = age span:\\
+        certain death after 5(n+1) years, $x_{i+1}(k+1) = x_{i}(k)$.\\
+
+        if there is a survival rate $\beta_{i}$:\\
+        $x_{i+1}(k+1) = \beta_{i} x_{i}(k)$\\
+
+        \textit{Another example:}
+        Equations of force. $F = ma = m \cfrac{d^2 x}{dt^2}$
+
+
+        \textit{Another example: Lotka-Volterra model predator-prey}.\\
+        $N_{1}(t)$ population density of a prey at time t.\\
+        $N_{2}(t)$ population density of a predator at time t.\\
+
+        \begin{equation}
+            \textit{Some derivarive system I wasn't able to copy.}
+        \end{equation}
+
+        \section{Stages of modeling}
+
+            \begin{enumerate}
+                \item Representation of the phenomena.
+                \item Generation analysis/approximation of solutions.
+                \item Exploration of structural relations. (describe the 
+                    behaviour).
+                \item Control, Predictions.
+            \end{enumerate}
+
+    
+
+\end{document}
+
+
+
+

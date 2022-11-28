@@ -1,0 +1,205 @@
+\documentclass[a4paper,12pt]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{xcolor}
+\usepackage[framemethod=default]{mdframed}
+
+\definecolor{blue}{RGB}{61, 160, 250}
+
+\author{Dave Alsina}
+\title{{\color{blue}Notas Clase}}
+
+
+
+\newcommand{\incfig}[2][1]{%
+        \def\svgwidth{#1\columnwidth}
+        \import{./figures/}{#2.pdf_tex}
+}
+
+\pdfsuppresswarningpagegroup=1
+
+\begin{document}
+        \maketitle
+
+        \begin{mdframed}{{\color{blue}Nota: }}
+        
+        \end{mdframed}
+
+        \section{Operacion}
+        sea X un conjungo una operación (binaria)
+        es una función $f : X \times X \rightarrow X$, se denota 
+        $F(x,y) = x * y = x \cdot y$.
+
+
+        \subsubsection{$\mathbb{R}^{3} \times \mathbb{R}^{3} \times \mathbb{R}^3$}
+4
+        Se llama producto mixto.
+        $(u, v, w) \mapsto (u \land v)\cdot w$, $\land$ es producto vectorial.
+
+
+        \subsection{Propiedades}
+
+            \subsubsection{Cerradura}
+            una operacion es necesariamente cerrada, $\forall x, y \in X$, 
+            $x \cdot y \in X$.
+
+            unos ejemplos de operación con cerradura:
+
+            \begin{itemize}
+                \item op. numerica.
+                \item op. matrices.
+                \item op. vectorial.
+            \end{itemize}
+
+        \begin{mdframed}{{\color{blue}Nota: }}
+            Si X es finito podemos definir F a través de una tabla.
+            por ejemplo una tabla de verdad.
+        \end{mdframed}
+
+        \subsubsection{Asociatividad}
+
+            Una operación es asociativa si $\forall x, y, x \in  X$,
+            $(x*y)*z = x*(y*z)$. Un contraejemplo:
+
+            \begin{equation}
+                e_{1} \cdot e_{1} \cdot e_{3} = e_{1} \cdot (e_{1} \cdot e_{3})
+                \neq   (e_{1} \cdot e_{2}) \cdot e_{3} = 0 \cdot e_{2}
+            \end{equation}
+
+        \subsubsection{Conmutativa}
+
+            si $\forall x, y, z \in X$, se tiene que $x * y = y * x$.
+
+            Pueden existir elementos especiales:
+
+            \begin{itemize}
+                \item \it{Neuto:} $\exists e \in X$ tal que $\forall x \in X$,
+                    $e * x = x$ and $x * e = x$.
+
+                \item \it{inverso:} $\forall x \in X$, $\exists y \in X$:
+                    $x * y = e = y * x$, el inverso me lleva al neutro.
+            \end{itemize}
+
+            \it{¿pueden existir múltiples neutros en una operación?}:
+            
+            \it{Dem:} Supongamos que $e, e' \in X$ son elementos neutros.
+
+            porque $e' = e * e' = e$, porque $e'$ es neutro, nos lleva a que 
+            son iguales ya que ambos dan neutro.
+            
+        \section{Clase de congruencia}
+
+        Sea $m \in \mathbb{N}, m \geq 2$, Dos enteros $a,b$ son congrentes 
+        módulo m.
+
+        sii:
+
+        \begin{equation}
+            m|(x-y) \iff x - y = mt, t \in Z
+        \end{equation}
+
+        esta es relacion de equivalencia en $\mathbb{Z}$ se denota $x \equiv y (mod \;m)$.
+
+        \begin{equation}
+            [x] = {y \in Z: x \equiv y (mod \; n)}
+        \end{equation}
+
+
+        \subsubsection{Division euclidea:}
+
+        si $a, b \in  Z, b \neq 0, \exists q, r \in Z$. t.q 
+        $0 \leq z |b|$ y $a = bq + r$, $r$ de residuo
+
+        Si $x = mq + r$ entonces: $[x] = [r]$.
+        porque 
+
+        \begin{equation}
+            x - r = mq \iff m|(x-r) \iff x \equiv r (mod \; m)
+        \end{equation}
+
+
+        Existen tantas clases de congruencia cuantos residuos en la division 
+        euclidea por m.
+
+        $\mathbb{Z}_{m} = \{ [0], [1], ..., [m-1]\}$
+
+        Queremos definir operaciones sobre el conjunto $\mathbb{Z}_{m}$. 
+        Empecemos entonces por:
+
+        Definimos:
+
+        \begin{equation}
+            [x]_{m} + [y]_{m} = [x + y]_{m}
+        \end{equation}
+
+        \begin{equation}
+            [x]_{m} \cdot [y]_{m} = [x \cdot y]_{m}
+        \end{equation}
+
+        Un ejemplo de lo anterior es: 
+        $[11]_{12} + [4]_{12} = [15]_{12} = [3]_{12}$
+
+        otro ejemplo: 
+        $[3]_{4} \cdot [3]_{4} = [9]_{4} = [1]_{4}$
+
+        Uno complicado:
+        $[2]_{4} \cdot [2]_{4} = [0]_{4}$.
+
+
+        Otro ejercicio:
+        \begin{align}
+            3^{2001} &\equiv 3 \cdot 3^{2000} (mod 10)\\
+                     &\equiv 3 \cdot 3(3^{4})^{500} (mod 10)\\
+                     &\equiv 3 \cdot 1^{500}\\
+                     &\equiv 3
+        \end{align}
+
+
+        \underline{dem:} Queremos Demostrar que estas operaciones están bien 
+        definidas, es decir:
+
+        si $[x]_{m} = [x']_{m}$ y $[y]_{m} = [y']_{m}$.
+
+        Luego:
+
+        \begin{align}
+            [x + y]_{m} &= [x' + y']_{m}\\
+            [xy]_{m} &= [x'y']_{m}
+        \end{align}
+
+        Siendo:
+
+        \begin{align*}
+            [x]_m &= [x']_m\\
+            x &\equiv x' &(mod \; n)
+        \end{align*}
+
+        equivalentemente $m|(x - x')$, es decir $\exists n$
+
+
+        \begin{mdframed}{{\color{blue}Nota: }}
+            \begin{itemize}
+                \item Hacer ejercicios como los anteriores de operación de módulo.
+                \item Hacer la demostración del caso de la multiplicación, demostrar que 
+            está bien definida. Estudiar la demostración completa.
+
+            \end{itemize}
+        \end{mdframed}
+
+
+
+\end{document}
