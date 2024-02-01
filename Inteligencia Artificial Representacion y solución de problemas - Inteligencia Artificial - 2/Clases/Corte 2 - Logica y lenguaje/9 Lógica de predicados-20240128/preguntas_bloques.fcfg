@@ -1,0 +1,43 @@
+% start P
+######################################
+# Reglas gramaticales para preguntas
+######################################
+
+# ---------------
+# Preguntas
+# ---------------
+
+# La pregunta es 'qué está' seguido de un vector (VE) 
+P[SEM=<(?ve(x))>] -> '¿' 'qué' 'está' VE[SEM=?ve] '?'
+
+# La pregunta es 'dónde está' seguido de un bloque (BL) 
+P[SEM=<(D(?b, x))>] -> '¿' 'dónde' 'está' BL[SEM=?b] '?'
+
+# ---------------
+# Vectores
+# ---------------
+
+# Un vector (VE) es una dirección (D) seguida de un bloque (BL)
+VE[SEM=<?d(?b)>] -> D[SEM=?d] BL[SEM=?b]
+
+#############################
+# Reglas léxicas
+#############################
+
+# ---------------
+# Bloques
+# ---------------
+
+BL[SEM=<bloque_A>] -> 'A'
+BL[SEM=<bloque_B>] -> 'B'
+BL[SEM=<bloque_C>] -> 'C'
+BL[SEM=<bloque_D>] -> 'D'
+
+# ---------------
+# Direcciones
+# ---------------
+D[SEM=<\y.(\x.DERECHA(x,y))>] -> 'a' 'la' 'derecha' 'de'
+D[SEM=<\y.(\x.IZQUIERDA(x,y))>] -> 'a' 'la' 'izquierda' 'de'
+D[SEM=<\y.(\x.ENCIMA(x,y))>] -> 'encima' 'de'
+D[SEM=<\y.(\x.DEBAJO(x,y))>] -> 'debajo' 'de'
+
